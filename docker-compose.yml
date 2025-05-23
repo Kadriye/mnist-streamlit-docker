@@ -1,0 +1,36 @@
+
+services:
+  web:
+    build: .
+    container_name: mnist_web
+    ports:
+      - "8501:8501"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=mnistdb
+      - DB_USER=postgres
+      - DB_PASSWORD=kadriye2606
+    volumes:
+      - ./mnist_model.pt:/app/mnist_model.pt
+
+  db:
+    image: postgres:15
+    container_name: mnist_db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: mnistdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: kadriye2606
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      
+volumes:  
+  pgdata:
+          
+  
+
