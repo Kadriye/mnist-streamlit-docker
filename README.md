@@ -3,13 +3,13 @@
 
 This is a web application that allows users to draw digits (0–9) on a canvas and receive real-time predictions using a convolutional neural network (CNN) trained on the MNIST dataset.
 
-🔗 **Live Demo:** [https://mnist-streamlit-docker.onrender.com](https://mnist-streamlit-docker.onrender.com)
+🔗 **Live Demo:** [mnist-streamlit-docker.onrender.com](https://mnist-streamlit-docker.onrender.com)
 
 ---
 
 ## 📸 Demo Preview
 
-![MNIST Digit Drawing App Screenshot](screenshot.png)
+![MNIST Digit Drawing App Screenshot]
 ![alt text](image.png)
 ![alt text](image-1.png)
 ![alt text](image-2.png)
