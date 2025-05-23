@@ -55,14 +55,17 @@ model.eval()            # Switch model to evaluation mode
 # ---------- 2. DATABASE SETUP---------- #
 
 #Retrieve database credentials from environment variables (with deafults)
-DB_USER = os.environ.get("DB_USER", "postgres")
-DB_PASS = os.environ.get("DB_PASSWORD", "postgres")
-DB_HOST = os.environ.get("DB_HOST", "localhost")
-DB_PORT = os.environ.get("DB_PORT", "5432")
-DB_NAME = os.environ.get("DB_NAME", "mnistdb")
+# Prefer DATABASE_URL if present (e.g. for Render), else fallback to manual vars
+DB_URI = os.getenv("DATABASE_URL")
+if not DB_URI:
+    DB_USER = os.environ.get("DB_USER", "postgres")
+    DB_PASS = os.environ.get("DB_PASSWORD", "postgres")
+    DB_HOST = os.environ.get("DB_HOST", "localhost")
+    DB_PORT = os.environ.get("DB_PORT", "5432")
+    DB_NAME = os.environ.get("DB_NAME", "mnistdb")
+    # Construct SQLAlchemy database URI
+    DB_URI = f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
-# Construct SQLAlchemy database URI
-DB_URI = f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 # Create SQLAlchemy engine and metadata object
 engine   = create_engine(DB_URI, echo=False)
 metadata = MetaData()
